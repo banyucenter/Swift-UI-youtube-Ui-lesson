@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  NavigationCustom
+//  YTapp
 //
-//  Created by Ipung Dev Center on 20/06/20.
+//  Created by Ipung Dev Center on 21/06/20.
 //  Copyright © 2020 Banyu Center. All rights reserved.
 //
 
@@ -12,47 +12,38 @@ struct ContentView: View {
     var body: some View {
         ZStack{
             TabView {
-                //Tabs 1
                 Home()
                     .tabItem {
                         Image(systemName: "house.fill")
                         Text("Beranda")
                 }
                 
-                //Tabs 2
-                Explore()
+                Home()
                     .tabItem {
                         Image(systemName: "paperplane.fill")
-                        Text("Eksplorasi")
+                        Text("Explorasi")
                 }
                 
-                //Tabs 3
                 Home()
                     .tabItem {
                         Image(systemName: "tray.fill")
                         Text("Subscription")
                 }
                 
-                //Tabs 4
-                Explore()
+                Home()
                     .tabItem {
                         Image(systemName: "envelope.fill")
                         Text("Kotak Masuk")
                 }
                 
-                //Tabs 5
                 Home()
                     .tabItem {
                         Image(systemName: "play.rectangle.fill")
                         Text("Koleksi")
                 }
-                
             }
-                //active color tabs
-                .accentColor(.red)
+            .accentColor(.red)
         }
-        //mode light
-        
     }
 }
 
@@ -62,271 +53,111 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+struct Home : View {
+    var body : some View {
+        NavigationView{
+            Kontent()
+                .navigationBarItems(
+                    leading:
+                    HStack{
+                        Button(action: {print("Hello Button")}){
+                            Image("youtube")
+                                .renderingMode(.original)
+                                .resizable()
+                                .frame(width:90, height:20)
+                        }
+                    },
+                    trailing:
+                    HStack(spacing:30){
+                        Button(action: {print("Hello Print")}){
+                            Image(systemName: "tray.full")
+                                .foregroundColor(Color.secondary)
+                        }
+                        
+                        Button(action: {print("Hello Print")}){
+                            Image(systemName: "video.fill")
+                                .foregroundColor(Color.secondary)
+                        }
+                        
+                        Button(action: {print("Hello Print")}){
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(Color.secondary)
+                        }
+                        
+                        Button(action: {print("Hello Print")}){
+                            Image("profile")
+                                .renderingMode(.original)
+                                .resizable()
+                                .frame(width:20, height:20)
+                                .clipShape(Circle())
+                        }
+                    }
+            )
+                .navigationBarTitle("", displayMode: .inline)
+        }.navigationViewStyle(StackNavigationViewStyle())
+    }
+}
 
-struct Home: View {
-    @State var showingAbout = false
+struct Kontent : View {
+    //Property Data
     
-    var body: some View {
-        
-        NavigationView {
-            //Kontent List Video
-            VideoView()
-                .navigationBarItems(
-                    //posisi navigation kanan
-                    leading:
-                    HStack{
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image("youtube")
-                                .renderingMode(.original)
-                                .resizable()
-                                .frame(width:90, height:20)
-                        }
-                        
-                    },
-                    //posisi navigation kiri
-                    trailing:
-                    HStack(spacing:30){
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image(systemName: "tray.full")
-                                .foregroundColor(Color.secondary)
-                            
-                        }
-                        
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image(systemName: "video.fill")
-                                .foregroundColor(Color.secondary)
-                            
-                        }
-                        
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(Color.secondary)
-                            
-                        }
-                        
-                        //Button with modal
-                        Button(action: {
-                            self.showingAbout.toggle()
-                        }) {
-                            Image("profile")
-                                .renderingMode(.original)
-                                .resizable()
-                                .frame(width:20, height:20)
-                                .clipShape(Circle())
-                        }.sheet(isPresented: $showingAbout) {
-                            About()
-                        }
-                    }
-                    
-                    
-            )
-                //inline mode
-                .navigationBarTitle("", displayMode: .inline)
-        }.navigationViewStyle(StackNavigationViewStyle())
-        
-    }
-}
-
-struct Explore: View {
-    var body: some View {
-        
-        NavigationView {
-            VideoView()
-                .navigationBarItems(
-                    //posisi kanan navigation
-                    leading:
-                    HStack{
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image("youtube")
-                                .renderingMode(.original)
-                                .resizable()
-                                .frame(width:90, height:20)
-                        }
-                        
-                    },
-                    //posisi kiri navigation
-                    trailing:
-                    HStack(spacing:30){
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image(systemName: "tray.full")
-                                .foregroundColor(Color.secondary)
-                        }
-                        
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image(systemName: "video.fill")
-                                .foregroundColor(Color.secondary)
-                        }
-                        
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(Color.secondary)
-                        }
-                        
-                        Button(action: {
-                            print("Edit button pressed...")
-                        }) {
-                            Image("profile")
-                                .renderingMode(.original)
-                                .resizable()
-                                .frame(width:20, height:20)
-                                .clipShape(Circle())
-                        }
-                    }
-                    
-                    
-            )
-                .navigationBarTitle("", displayMode: .inline)
-        }.navigationViewStyle(StackNavigationViewStyle())
-        
-    }
-}
-
-
-//Konten Viewo
-struct VideoView : View {
     var body : some View {
         List{
-            VStack(alignment: .leading){
-                ZStack(alignment: .bottomTrailing){
-                    Image("content")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                    
-                    Text("10:00")
-                        .padding(.all,5)
-                        .foregroundColor(Color.white)
-                        .font(.caption)
-                        .background(Color.black)
-                        .cornerRadius(5)
-                        .padding(.trailing,5)
-                        .padding(.bottom,5)
-                }
-                
-                HStack(spacing:20){
-                    Image("profile")
-                        .resizable()
-                        .frame(width:30,height:30)
-                        .clipShape(Circle())
-                    
-                    VStack(alignment:.leading){
-                        Text("Tutorial Swift UI #1").font(.headline)
-                        HStack{
-                            Text("Ipung Dev Channel - 300x ditonton - 9 Jam yang lalu").font(.caption)
-                        }
-                    }
-                    Spacer()
-                    Image(systemName: "list.bullet")
-                }
-            }
-            
-            VStack(alignment: .leading){
-                ZStack(alignment: .bottomTrailing){
-                    Image("blockchain")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                    
-                    Text("15:00")
-                        .padding(.all,5)
-                        .foregroundColor(Color.white)
-                        .font(.caption)
-                        .background(Color.black)
-                        .cornerRadius(5)
-                        .padding(.trailing,5)
-                        .padding(.bottom,5)
-                }
-                
-                HStack(spacing:20){
-                    Image("profile")
-                        .resizable()
-                        .frame(width:30,height:30)
-                        .clipShape(Circle())
-                    
-                    VStack(alignment:.leading){
-                        Text("Tutorial Blockchain").font(.headline)
-                        HStack{
-                            Text("Ipung Dev Channel - 300x ditonton - 9 Jam yang lalu").font(.caption)
-                        }
-                    }
-                    Spacer()
-                    Image(systemName: "list.bullet")
-                }
-            }
-            
-            VStack(alignment: .leading){
-                ZStack(alignment: .bottomTrailing){
-                    Image("searchbar")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                    
-                    Text("10:00")
-                        .padding(.all,5)
-                        .foregroundColor(Color.white)
-                        .font(.caption)
-                        .background(Color.black)
-                        .cornerRadius(5)
-                        .padding(.trailing,5)
-                        .padding(.bottom,5)
-                }
-                
-                HStack(spacing:20){
-                    Image("profile")
-                        .resizable()
-                        .frame(width:30,height:30)
-                        .clipShape(Circle())
-                    
-                    VStack(alignment:.leading){
-                        Text("Tutorial iOS Swift UI #3").font(.headline)
-                        HStack{
-                            Text("Ipung Dev Channel - 300x ditonton - 9 Jam yang lalu banget").font(.caption)
-                        }
-                    }
-                    Spacer()
-                    Image(systemName: "list.bullet")
-                }
-            }
-            
+            cellKontent(imageKontent: "content", profilKontent: "profile", judul: "Tutorial SwiftUI #1", deskripsi: "Ini adalah deskripsi vide - 300x ditonton - 1 Jam yang lalu", durasi: "10:00")
+            cellKontent(imageKontent: "blockchain", profilKontent: "profile", judul: "Tutorial SwiftUI #2", deskripsi: "Ini adalah deskripsi vide - 300x ditonton - 1 Jam yang lalu", durasi: "10:00")
+            cellKontent(imageKontent: "content", profilKontent: "profile", judul: "Tutorial SwiftUI #3", deskripsi: "Ini adalah deskripsi vide - 300x ditonton - 1 Jam yang lalu", durasi: "10:00")
         }
     }
 }
 
-struct About: View {
-    @Environment(\.presentationMode) private var presentationMode
+//Buat kerangka
+struct cellKontent : View {
+    var imageKontent: String
+    var profilKontent: String
+    var judul: String
+    var deskripsi: String
+    var durasi: String
     
-    var body :some View {
-        
-            ZStack(alignment:.topLeading){
+    var body : some View {
+        //kontent framework
+        VStack{
+            ZStack(alignment: .bottomTrailing){
+                Image(imageKontent)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
                 
-                
-                
-                Image("content")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                
-                Text("About")
-                
-                Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Dismiss")
-                }
+                Text(durasi)
+                    .padding(.all, 5)
+                    .foregroundColor(Color.white)
+                    .font(.caption)
+                    .background(Color.black)
+                    .cornerRadius(5)
+                    .padding(.trailing, 5)
+                    .padding(.bottom, 5)
+            }
             
+            HStack(spacing:20){
+                Image(profilKontent)
+                    .resizable()
+                    .frame(width:30, height:30)
+                    .clipShape(Circle())
+                
+                VStack(alignment: .leading){
+                    Text(judul).font(.headline)
+                    HStack{
+                        Text(deskripsi).font(.caption)
+                    }
+                }
+                Spacer()
+                Image(systemName: "list.bullet")
+            }
         }
+        
         
     }
 }
+
+
+
+
+
